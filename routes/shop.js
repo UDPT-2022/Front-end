@@ -10,5 +10,5 @@ router.get("/cart-history", shopController.shopingCartHistory);
 router.get("/checkout", shopController.checkout);
 router.get("/shop-near", shopController.shopnear);
 router.get("/shop-details1", shopController.shopDetails1);
-router.get("/item-detail", shopController.itemDetail);
+router.get("/item-detail/:id", shopController.itemDetail);
 module.exports = router;

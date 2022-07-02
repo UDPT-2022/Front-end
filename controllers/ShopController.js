@@ -1,10 +1,15 @@
-const shop = require("../model/Shop");
+const shop = require("../model/ShopModel");
 
 class ShopController {
-  index(req, res) {
-    res.render("cus_index", {
-      layout: "customer_layout",
-    });
+  index(req, res, next) {
+    Promise.all([shop.allproducts()])
+      .then(([products]) =>
+        res.render("cus_index", {
+          layout: "customer_layout",
+          products: products,
+        })
+      )
+      .catch(next);
   }
 
   shopgrid(req, res) {
@@ -43,10 +48,13 @@ class ShopController {
     });
   }
 
-  itemDetail(req, res) {
-    res.render("cus_item-detail", {
-      layout: "customer_layout",
-    });
+  itemDetail(req, res, next) {
+    shop.getProduct([req.params.id]).then((product) =>
+      res.render("cus_item-detail", {
+        layout: "customer_layout",
+        product: product,
+      })
+    );
   }
 }
 
