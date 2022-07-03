@@ -19,8 +19,10 @@ class ShopController {
   }
 
   cart(req, res) {
+    const products = shop.getAllCart();
     res.render("cus_shoping-cart", {
       layout: "customer_layout",
+      products: products,
     });
   }
 
@@ -55,6 +57,16 @@ class ShopController {
         product: product,
       })
     );
+  }
+
+  addCart(req, res, next) {
+    shop.addItemToCart([req.params.id]);
+    res.redirect("back");
+  }
+
+  removeitemCart(req, res, next) {
+    shop.removeitemCart([req.params.id]);
+    res.redirect("back");
   }
 }
 

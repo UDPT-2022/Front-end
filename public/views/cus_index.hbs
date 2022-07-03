@@ -98,17 +98,17 @@
             <div class="row featured__filter">
                 {{#each products}}
                 <div class="col-lg-3 col-md-4 col-sm-6 mix oranges fresh-meat">
-                    <div class="featured__item">
-                        <div class="featured__item__pic set-bg" data-setbg="{{this.ANH}}">
-                            <ul class="featured__item__pic__hover">
-                                <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
-                            </ul>
+                        <div class="featured__item">
+                                <div class="featured__item__pic set-bg" data-setbg="{{this.ANH}}">
+                                    <ul class="featured__item__pic__hover">
+                                        <li><a href="/addcart/{{this.MA_SP}}"><i class="fa fa-shopping-cart"></i></a></li>
+                                    </ul>
+                                </div>
+                            <div class="featured__item__text">
+                                <h6><a href="/item-detail/{{this.MA_SP}}">{{this.TEN_SP}}</a></h6>
+                                <h5>{{this.GIA_SP}}</h5>
+                            </div>
                         </div>
-                        <div class="featured__item__text">
-                            <h6><a href="/item-detail/{{this.MA_SP}}">{{this.TEN_SP}}</a></h6>
-                            <h5>{{this.GIA_SP}}</h5>
-                        </div>
-                    </div>
                 </div>
                 {{/each}}
 
