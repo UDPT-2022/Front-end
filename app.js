@@ -31,5 +31,5 @@ app.set("views", "./public/views");
 route(app);
 
 app.listen(port, () => {
-  console.log(`Listen at https://localhost:${port}`);
+  console.log(`Listen at http://localhost:${port}`);
 });
