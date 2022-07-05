@@ -68,6 +68,18 @@ class ShopController {
     shop.removeitemCart([req.params.id]);
     res.redirect("back");
   }
+
+  searchProductByName(req, res, next) {
+    Promise.all([shop.searchProductByName(req.query.q)])
+      .then(([products]) =>
+        res.render("cus_index", {
+          layout: "customer_layout",
+          products: products,
+          value: req.query.q,
+        })
+      )
+      .catch(next);
+  }
 }
 
 module.exports = new ShopController();

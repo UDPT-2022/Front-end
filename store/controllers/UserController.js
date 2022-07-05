@@ -1,4 +1,4 @@
-const shop = require("../model/UserModel");
+const user = require("../model/UserModel");
 
 class UserController {
   login(req, res) {
@@ -7,7 +7,7 @@ class UserController {
     });
   }
   postLogin(req, res) {
-    console.log(req.body);
+    user.login(req.body);
     res.redirect("/");
   }
   register(req, res) {
@@ -18,6 +18,10 @@ class UserController {
   postRegister(req, res) {
     console.log(req.body);
     res.redirect("/user/login");
+  }
+  logout() {
+    user.logout();
+    res.redirect("/");
   }
 }
 

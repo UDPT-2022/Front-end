@@ -1,11 +1,12 @@
 const axios = require("axios");
-//const localStorage = require("node-localstorage");
-axios.defaults.baseURL = "http://localhost:8001/api";
+const LocalStorage = require("node-localstorage").LocalStorage;
+const URL = "http://localhost:8001/api";
+localStorage = new LocalStorage("./scratch");
 
 exports.allproducts = async () => {
   const rs = await axios({
     method: "get",
-    url: "/products",
+    url: URL + "/products",
   })
     .then((response) => response.data)
     .catch((error) => console.log("errrrrrrr : ", error));
@@ -14,7 +15,7 @@ exports.allproducts = async () => {
 exports.getProduct = async (id) => {
   const rs = await axios({
     method: "get",
-    url: "/products/" + id.toString(),
+    url: URL + "/products/" + id.toString(),
   })
     .then((response) => response.data)
     .catch((error) => console.log("errrrrrrr : ", error));
@@ -22,10 +23,6 @@ exports.getProduct = async (id) => {
 };
 
 exports.addItemToCart = (id) => {
-  if (typeof localStorage === "undefined" || localStorage === null) {
-    var LocalStorage = require("node-localstorage").LocalStorage;
-    localStorage = new LocalStorage("./scratch");
-  }
   this.getProduct(id).then((products) => {
     const storedDataUserCart = localStorage.getItem("cart_web");
     if (storedDataUserCart) {
@@ -55,18 +52,10 @@ exports.addItemToCart = (id) => {
   });
 };
 exports.getAllCart = () => {
-  if (typeof localStorage === "undefined" || localStorage === null) {
-    var LocalStorage = require("node-localstorage").LocalStorage;
-    localStorage = new LocalStorage("./scratch");
-  }
   const storedDataUserCart = localStorage.getItem("cart_web");
   return JSON.parse(storedDataUserCart);
 };
 exports.removeitemCart = (id) => {
-  if (typeof localStorage === "undefined" || localStorage === null) {
-    var LocalStorage = require("node-localstorage").LocalStorage;
-    localStorage = new LocalStorage("./scratch");
-  }
   const storedDataUserCart = localStorage.getItem("cart_web");
   if (storedDataUserCart) {
     let cart = JSON.parse(storedDataUserCart);
@@ -74,4 +63,16 @@ exports.removeitemCart = (id) => {
     console.log(cart);
     localStorage.setItem("cart_web", JSON.stringify(cart));
   }
+};
+exports.searchProductByName = async (q) => {
+  const rs = await axios({
+    method: "post",
+    url: URL + "/products/search",
+    data: {
+      TEN_SP: q,
+    },
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
 };
