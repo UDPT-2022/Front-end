@@ -21,6 +21,15 @@ exports.getProduct = async (id) => {
     .catch((error) => console.log("errrrrrrr : ", error));
   return rs;
 };
+exports.getReviewProduct = async (id) => {
+  const rs = await axios({
+    method: "get",
+    url: URL + "/reviews/" + id.toString(),
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
 
 exports.addItemToCart = (id) => {
   this.getProduct(id).then((products) => {

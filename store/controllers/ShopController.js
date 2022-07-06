@@ -51,12 +51,41 @@ class ShopController {
   }
 
   itemDetail(req, res, next) {
-    shop.getProduct([req.params.id]).then((product) =>
-      res.render("cus_item-detail", {
-        layout: "customer_layout",
-        product: product,
+    // Promise.all([
+    //   shop.getProduct([req.params.id]),
+    //   //shop.getReviewProduct([req.params.id]),
+    // ])
+    //   .then(([products]) =>
+    //     res.render("cus_item-detail", {
+    //       layout: "customer_layout",
+    //       products: products,
+    //       //reviews: reviews,
+    //     })
+    //   )
+    //   .catch(next);
+    Promise.all([
+      shop.getProduct([req.params.id]),
+      shop.getReviewProduct([req.params.id]),
+    ])
+      .then(([product, reviews]) => {
+        console.log(product);
+        console.log(reviews);
+        res.render("cus_item-detail", {
+          layout: "customer_layout",
+          product: product,
+          reviews: reviews,
+        });
       })
-    );
+      .catch(next);
+    // const reviews = shop.getReviewProduct([req.params.id]);
+    // console.log(reviews);
+    // shop.getProduct([req.params.id]).then((product) => {
+    //   console.log(product);
+    //   res.render("cus_item-detail", {
+    //     layout: "customer_layout",
+    //     product: product,
+    //   });
+    // });
   }
 
   addCart(req, res, next) {

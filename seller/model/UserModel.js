@@ -12,21 +12,21 @@ exports.login = async (q) => {
     .catch((error) => console.log("errrrrrrr : ", error));
   return rs;
 };
-exports.logout = async (data) => {
+exports.logout = async (q) => {
   const rs = await axios({
     method: "post",
     url: URL + "/logout",
-    data: data,
+    data: q,
   })
     .then((response) => response.data)
     .catch((error) => console.log("errrrrrrr : ", error));
   return rs;
 };
-exports.register = async (data) => {
+exports.logout = async (q) => {
   const rs = await axios({
     method: "post",
     url: URL + "/register",
-    data: data,
+    data: q,
   })
     .then((response) => response.data)
     .catch((error) => console.log("errrrrrrr : ", error));

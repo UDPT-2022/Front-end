@@ -1,0 +1,75 @@
+* {
+  margin: 0px;
+}
+#header {
+  height: 46px;
+  background-color: black;
+  position: relative;
+}
+#header #title {
+  color: white;
+  font-size: 25px;
+  text-transform: uppercase;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateY(-50%) translateX(-50%);
+}
+#title a {
+  color: #ffffff;
+  text-decoration: none;
+}
+#header #login {
+  color: white;
+  font-size: 20px;
+  position: absolute;
+  top: 50%;
+  right: 1%;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: row;
+}
+#login a {
+  color: #ffffff;
+  text-decoration: none;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+#container {
+  display: flex;
+  min-height: 600px;
+}
+#menu {
+  flex: 1.5;
+  background-color: gray;
+}
+#menu .Listmenu {
+  padding-inline-start: 1rem;
+}
+#menu li {
+  list-style: none;
+  padding-top: 10px;
+}
+#menu a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 15px;
+}
+#content {
+  flex: 8.5;
+  max-width: 80%;
+  padding-left: 1rem;
+}
+#img-cart {
+  width: 100px;
+  height: auto;
+}
+#form-create-product > label {
+  font-weight: bold;
+}
+.bt-add {
+  width: 100%;
+}
+.margin-form-input {
+  margin-left: 100px;
+}

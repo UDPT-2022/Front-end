@@ -10,9 +10,7 @@
             <div class="card" style="border-radius: 15px;">
               <div class="card-body p-5">
                 <h2 class="text-uppercase text-center mb-5">Create an account</h2>
-
                 <form action="/user/register" method="post">
-
                   <div class="form-outline mb-4">
                     <label class="form-label" for="username">User name</label>
                     <input
@@ -22,7 +20,6 @@
                       class="form-control form-control-lg"
                     />
                   </div>
-
                   <div class="form-outline mb-4">
                     <label class="form-label" for="email">Your Email</label>
                     <input
@@ -32,7 +29,6 @@
                       class="form-control form-control-lg"
                     />
                   </div>
-
                   <div class="form-outline mb-4">
                     <label class="form-label" for="password">Password</label>
                     <input
@@ -43,7 +39,7 @@
                       onkeyup="check();"
                     />
                   </div>
-
+                  <input type="hidden" id="role" name="role" value="BUYER" />
                   <div class="form-outline mb-4">
                     <label class="form-label" for="confirm_password">Repeat your
                       password</label>
@@ -55,19 +51,6 @@
                     />
                     <span id="message"></span>
                   </div>
-
-                  {{! <div class="form-check d-flex justify-content-center mb-5">
-                    <input
-                      class="form-check-input me-2"
-                      type="checkbox"
-                      value=""
-                      id="form2Example3cg"
-                    />
-                    <label class="form-check-label" for="form2Example3g">
-                      I agree all statements in
-                      <a href="#!" class="text-body"><u>Terms of service</u></a>
-                    </label>
-                  </div> }}
 
                   <div class="d-flex justify-content-center">
                     <button
@@ -93,7 +76,7 @@
     </div>
   </section>
   <script>
-    var check = function() { if (document.getElementById('password').value ==
+    var check = function () { if (document.getElementById('password').value ==
     document.getElementById('confirm_password').value) {
     document.getElementById('submit').disabled = false;
     document.getElementById('message').style.color = 'green';

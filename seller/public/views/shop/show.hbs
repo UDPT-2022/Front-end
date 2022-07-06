@@ -1,0 +1,43 @@
+<div id="menu">
+  <div class="hero__search__form">
+    <form action="/search">
+      <input type="text" id="q" name="q" class="form-control" placeholder="Tìm kiến sản phẩm" value="{{value}}">
+      <button type="submit" class="btn btn-primary bt-add">Tìm kiếm</button>
+    </form>
+  </div>
+  <ul class="ListMenu">
+    <li>
+    </li>
+  </ul>
+  <a href="/create" class="btn btn-success bt-add">Thêm sản phẩm</a>
+</div>
+<div id="content">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">ID</th>
+        <th scope="col">Sản phẩm</th>
+        <th scope="col">Loại sản phẩm</th>
+        <th scope="col">Giá</th>
+        <th scope="col">Số lượng còn lại</th>
+        <th scope="col">Cập nhật</th>
+        <th scope="col">Xóa</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each products}}
+      <tr>
+        <th scope="row">{{this.MA_SP}}</th>
+        <td>
+          <img src="{{this.ANH}}" alt="" id="img-cart" />
+          <h5>{{this.TEN_SP}}</h5>
+        </td>
+        <td>{{this.LOAI_SP}}</td>
+        <td>{{this.GIA_SP}}</td>
+        <td>{{this.SL_CON_LAI}}</td>
+        <td><a href="/update/{{this.MA_SP}}">Cập nhật</a></td>
+        <td><a href="/delete/{{this.MA_SP}}">Xóa</a></td>
+        {{/each}}
+    </tbody>
+  </table>
+</div>

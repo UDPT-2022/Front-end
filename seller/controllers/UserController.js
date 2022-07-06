@@ -16,11 +16,7 @@ class UserController {
     });
   }
   postRegister(req, res) {
-    Promise.all([user.register(req.body)])
-      .then(([data]) => res.redirect("/user/login"))
-      .catch(next);
-    const data = user.register(req.body);
-    console.log(data);
+    console.log(req.body);
     res.redirect("/user/login");
   }
   logout() {
