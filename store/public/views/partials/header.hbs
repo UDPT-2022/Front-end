@@ -11,18 +11,48 @@
             </ul>
           </div>
         </div>
-        <div class="col-lg-5 col-md-6">
-          <div class="header__top__right">
+        <div class="col-lg-4 col-md-6">
+          <div class="header__top__right cart-margin">
             <div class="header__top__right__auth">
-              <a href="/cart"><i class="fa fa-shopping-bag"></i> Cart</a>
+              <a href="/cart"><i class="fa fa-shopping-bag"></i> Giỏ hàng</a>
             </div>
           </div>
         </div>
-        <div class="col-lg-1 col-md-6">
+        <div class="col-lg-2 col-md-6">
           <div class="header__top__right">
-            <div class="header__top__right__auth">
-              <a href="/user/login"><i class="fa fa-user"></i> Login</a>
-            </div>
+            {{#if user}}
+              <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                  <ul class="navbar-nav">
+                    <li class="nav-item dropdown">
+                      <a
+                        class="nav-link dropdown-toggle"
+                        href="#"
+                        id="navbarDropdownMenuLink"
+                        role="button"
+                        data-toggle="dropdown"
+                        aria-haspopup="true"
+                        aria-expanded="false"
+                      >
+                        {{user.name}}
+                      </a>
+                      <div
+                        class="dropdown-menu"
+                        aria-labelledby="navbarDropdownMenuLink"
+                      >
+                        <a class="dropdown-item" href="#">Cá nhân</a>
+                        <a class="dropdown-item" href="/user/logout">Đăng xuất</a>
+                        {{! <a class="dropdown-item" href="#">Something else here</a> }}
+                      </div>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            {{else}}
+              <div class="header__top__right__auth cart-margin">
+                <a href="/user/login"><i class="fa fa-user"></i>Đăng nhập</a>
+              </div>
+            {{/if}}
           </div>
         </div>
       </div>

@@ -7,7 +7,7 @@ router.get("/create", shopController.create);
 router.post("/create", shopController.store);
 router.get("/update/:id", shopController.update);
 router.post("/update", shopController.updateProduct);
-router.delete("/delete/:id", shopController.deleteProduct);
+router.get("/delete/:id", shopController.deleteProduct);
 router.get("/search", shopController.searchProductByName);
 router.get("/", shopController.index);
 module.exports = router;

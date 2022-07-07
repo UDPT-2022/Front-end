@@ -48,6 +48,14 @@ body {
   padding-right: 400px;
 }
 
+#message-login-false {
+  color: red;
+}
+
+.cart-margin {
+  margin-top: 15px;
+}
+
 h1,
 h2,
 h3,
@@ -302,7 +310,7 @@ ol {
 
 .header__top__right {
   text-align: right;
-  padding: 10px 0 13px;
+  padding: px 0px 0px 0px;
 }
 
 .header__top__right__social {

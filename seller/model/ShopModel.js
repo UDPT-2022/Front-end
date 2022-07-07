@@ -12,6 +12,18 @@ exports.allproducts = async () => {
     .catch((error) => console.log("errrrrrrr : ", error));
   return rs;
 };
+exports.getAllProductBySeller = async (data) => {
+  const rs = await axios({
+    method: "post",
+    url: URL + "/products/search",
+    data: {
+      MA_CUA_HANG: data,
+    },
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
 exports.getProduct = async (id) => {
   const rs = await axios({
     method: "get",
@@ -33,12 +45,24 @@ exports.addProduct = async (data) => {
   return rs;
 };
 
-exports.searchProductByName = async (q) => {
+exports.updateProduct = async (data) => {
+  const rs = await axios({
+    method: "put",
+    url: URL + "/products/" + data.MA_SP,
+    data: data,
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
+
+exports.searchProductByName = async (name, id) => {
   const rs = await axios({
     method: "post",
     url: URL + "/products/search",
     data: {
-      TEN_SP: q,
+      TEN_SP: name,
+      MA_CUA_HANG: id,
     },
   })
     .then((response) => response.data)

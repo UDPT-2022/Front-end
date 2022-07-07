@@ -73,3 +73,23 @@
 .margin-form-input {
   margin-left: 100px;
 }
+#form-login {
+  width: 100%;
+  margin-left: 400px;
+  margin-right: 400px;
+}
+#form-register {
+  width: 100%;
+}
+#form-update {
+  width: 100%;
+  margin-right: 200px;
+  margin-left: 200px;
+}
+.full-width {
+  width: 100%;
+}
+#img-product {
+  width: 300px;
+  height: 100%;
+}

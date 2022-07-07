@@ -1,29 +1,38 @@
 const user = require("../model/UserModel");
 
 class UserController {
-  login(req, res) {
+  login(req, res, next) {
     res.render("cus_login", {
       layout: "customer_layout",
+      error: req.query.error,
     });
   }
-  postLogin(req, res) {
-    user.login(req.body);
-    res.redirect("/");
+  postLogin(req, res, next) {
+    Promise.all([user.login(req.body)])
+      .then(([data]) => {
+        if (data === undefined) {
+          res.redirect("/user/login?error=Tài khoản sai, mời nhập lại");
+          return;
+        }
+        res.redirect("/");
+        user.saveUser(data);
+      })
+      .catch(next);
   }
-  register(req, res) {
+  register(req, res, next) {
     res.render("cus_register", {
       layout: "customer_layout",
     });
   }
-  postRegister(req, res) {
+  postRegister(req, res, next) {
     Promise.all([user.register(req.body)])
-      .then(([data]) => res.redirect("/user/login"))
+      .then(([data]) => {
+        console.log(data);
+        res.redirect("/user/login");
+      })
       .catch(next);
-    const data = user.register(req.body);
-    console.log(data);
-    res.redirect("/user/login");
   }
-  logout() {
+  logout(req, res, next) {
     user.logout();
     res.redirect("/");
   }

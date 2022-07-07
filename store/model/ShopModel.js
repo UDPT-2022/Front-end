@@ -15,7 +15,7 @@ exports.allproducts = async () => {
 exports.getProduct = async (id) => {
   const rs = await axios({
     method: "get",
-    url: URL + "/products/" + id.toString(),
+    url: URL + "/products/" + id,
   })
     .then((response) => response.data)
     .catch((error) => console.log("errrrrrrr : ", error));
@@ -23,8 +23,11 @@ exports.getProduct = async (id) => {
 };
 exports.getReviewProduct = async (id) => {
   const rs = await axios({
-    method: "get",
-    url: URL + "/reviews/" + id.toString(),
+    method: "post",
+    url: URL + "/reviews/search",
+    data: {
+      MA_SP: id,
+    },
   })
     .then((response) => response.data)
     .catch((error) => console.log("errrrrrrr : ", error));

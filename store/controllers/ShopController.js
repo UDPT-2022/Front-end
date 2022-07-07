@@ -1,20 +1,23 @@
 const shop = require("../model/ShopModel");
+const user = require("../model/UserModel");
 
 class ShopController {
   index(req, res, next) {
     Promise.all([shop.allproducts()])
-      .then(([products]) =>
+      .then(([products]) => {
         res.render("cus_index", {
           layout: "customer_layout",
           products: products,
-        })
-      )
+          user: user.getUserLocal(),
+        });
+      })
       .catch(next);
   }
 
   shopgrid(req, res) {
     res.render("cus_shop-details", {
       layout: "customer_layout",
+      user: user.getUserLocal(),
     });
   }
 
@@ -23,69 +26,52 @@ class ShopController {
     res.render("cus_shoping-cart", {
       layout: "customer_layout",
       products: products,
+      user: user.getUserLocal(),
     });
   }
 
   shopingCartHistory(req, res) {
     res.render("cus_shoping-cart-history", {
       layout: "customer_layout",
+      user: user.getUserLocal(),
     });
   }
 
   checkout(req, res) {
     res.render("cus_checkout", {
       layout: "customer_layout",
+      user: user.getUserLocal(),
     });
   }
 
   shopnear(req, res) {
     res.render("cus_nearest-shop", {
       layout: "customer_layout",
+      user: user.getUserLocal(),
     });
   }
 
   shopDetails1(req, res) {
     res.render("cus_shop-details-not-exists", {
       layout: "customer_layout",
+      user: user.getUserLocal(),
     });
   }
 
   itemDetail(req, res, next) {
-    // Promise.all([
-    //   shop.getProduct([req.params.id]),
-    //   //shop.getReviewProduct([req.params.id]),
-    // ])
-    //   .then(([products]) =>
-    //     res.render("cus_item-detail", {
-    //       layout: "customer_layout",
-    //       products: products,
-    //       //reviews: reviews,
-    //     })
-    //   )
-    //   .catch(next);
     Promise.all([
-      shop.getProduct([req.params.id]),
-      shop.getReviewProduct([req.params.id]),
+      shop.getProduct(req.params.id),
+      shop.getReviewProduct(req.params.id),
     ])
       .then(([product, reviews]) => {
-        console.log(product);
-        console.log(reviews);
         res.render("cus_item-detail", {
           layout: "customer_layout",
           product: product,
           reviews: reviews,
+          user: user.getUserLocal(),
         });
       })
       .catch(next);
-    // const reviews = shop.getReviewProduct([req.params.id]);
-    // console.log(reviews);
-    // shop.getProduct([req.params.id]).then((product) => {
-    //   console.log(product);
-    //   res.render("cus_item-detail", {
-    //     layout: "customer_layout",
-    //     product: product,
-    //   });
-    // });
   }
 
   addCart(req, res, next) {
@@ -105,6 +91,7 @@ class ShopController {
           layout: "customer_layout",
           products: products,
           value: req.query.q,
+          user: user.getUserLocal(),
         })
       )
       .catch(next);

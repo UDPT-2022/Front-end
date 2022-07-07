@@ -1,4 +1,4 @@
-<div class="margin-form-input">
+<div id="form-update">
   <form action="/update" method="POST" id="form-create-product">
     <input type="hidden" id="MA_SP" name="MA_SP" value="{{product.MA_SP}}" />
     <label for="TEN_SP">Tên sản phẩm</label>
@@ -78,16 +78,33 @@
       name="MO_TA"
     >{{product.MO_TA}}</textarea>
     <br />
-    <label for="ANH">Ảnh sản phẩm</label>
+    {{!-- <label for="ANH">Ảnh sản phẩm</label>
     <input
       type="file"
       class="form-control-file"
       id="ANH"
       name="ANH"
       value="{{product.ANH}}"
+    /> --}}
+    <label for="ANH">Ảnh sản phẩm</label>
+    <input
+      type="text"
+      class="form-control"
+      id="ANH"
+      name="ANH"
+      placeholder="Tên sản phẩm"
+      value="{{product.ANH}}"
+      onclick="changeImg()"
+      onkeyup="changeImg()"
+      onchange="changeImg()"
     />
+    <img id="img-product" src="" alt="" />
     <br />
     <br />
-    <button type="submit" class="btn btn-primary">Cập nhật sản phẩm</button>
+    <button type="submit" class="btn btn-primary full-width">Cập nhật sản phẩm</button>
   </form>
+  <script>
+    var changeImg = () => { document.getElementById("img-product").src =
+    document.getElementById("ANH").value }
+  </script>
 </div>

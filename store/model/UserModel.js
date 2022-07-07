@@ -1,26 +1,41 @@
 const axios = require("axios");
 const LocalStorage = require("node-localstorage").LocalStorage;
 const URL = "http://localhost:8002/api";
+localStorage = new LocalStorage("./scratch");
 
-exports.login = async (q) => {
+exports.login = async (data) => {
   const rs = await axios({
     method: "post",
     url: URL + "/login",
-    data: q,
-  })
-    .then((response) => response.data)
-    .catch((error) => console.log("errrrrrrr : ", error));
-  return rs;
-};
-exports.logout = async (data) => {
-  const rs = await axios({
-    method: "post",
-    url: URL + "/logout",
     data: data,
   })
     .then((response) => response.data)
     .catch((error) => console.log("errrrrrrr : ", error));
   return rs;
+};
+exports.saveUser = (data) => {
+  localStorage.setItem("user", JSON.stringify(data));
+};
+exports.dropUser = () => {
+  localStorage.removeItem("user");
+};
+exports.getUserLocal = () => {
+  const localUser = localStorage.getItem("user");
+  if (localUser) {
+    let user = JSON.parse(localUser);
+    return user.user;
+  }
+};
+exports.logout = async () => {
+  this.dropUser();
+  // const rs = await axios({
+  //   method: "post",
+  //   url: URL + "/logout",
+  //   data: data,
+  // })
+  //   .then((response) => response.data)
+  //   .catch((error) => console.log("errrrrrrr : ", error));
+  // return rs;
 };
 exports.register = async (data) => {
   const rs = await axios({
