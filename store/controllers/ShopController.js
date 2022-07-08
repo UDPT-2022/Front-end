@@ -3,11 +3,12 @@ const user = require("../model/UserModel");
 
 class ShopController {
   index(req, res, next) {
-    Promise.all([shop.allproducts()])
-      .then(([products]) => {
+    Promise.all([shop.allproducts(), shop.getProductType()])
+      .then(([products, types]) => {
         res.render("cus_index", {
           layout: "customer_layout",
           products: products,
+          types: types,
           user: user.getUserLocal(),
         });
       })
@@ -38,10 +39,21 @@ class ShopController {
   }
 
   checkout(req, res) {
+    const usercr = user.getUserLocal();
+    if (!usercr) {
+      res.redirect("/user/login");
+      return;
+    }
+    const products = shop.getAllCart();
     res.render("cus_checkout", {
       layout: "customer_layout",
       user: user.getUserLocal(),
+      products: products,
     });
+  }
+
+  createOrder(req, res, next) {
+    const products = shop.getAllCart();
   }
 
   shopnear(req, res) {
@@ -85,16 +97,24 @@ class ShopController {
   }
 
   searchProductByName(req, res, next) {
-    Promise.all([shop.searchProductByName(req.query.q)])
-      .then(([products]) =>
+    Promise.all([
+      shop.searchProductByName(req.query.q, req.query.type),
+      shop.getProductType(),
+    ])
+      .then(([products, types]) =>
         res.render("cus_index", {
           layout: "customer_layout",
           products: products,
           value: req.query.q,
+          //types: types,
           user: user.getUserLocal(),
         })
       )
       .catch(next);
+  }
+  changQualityProductOnCart(req, res, next) {
+    shop.changQualityProductOnCart(req.query.id, req.query.q);
+    res.redirect("/cart");
   }
 }
 

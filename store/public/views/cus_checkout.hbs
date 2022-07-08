@@ -23,14 +23,21 @@
 
       <div class="checkout__form">
         <h4>Thông tin đặt hàng</h4>
-        <form action="#">
+        <form action="/checkout" method="post">
+          <input type="hidden" id="TONG_TIEN" name="TONG_TIEN" value="" />
+          <input
+            type="hidden"
+            id="MA_NGUOI_DUNG"
+            name="MA_NGUOI_DUNG"
+            value="{{user.id}}"
+          />
           <div class="row">
             <div class="col-lg-8 col-md-6">
               <div class="row">
                 <div class="col">
                   <div class="checkout__input">
                     <p>Họ và tên<span>*</span></p>
-                    <input type="text" />
+                    <input type="text" name="HO_TEN" />
                   </div>
                 </div>
               </div>
@@ -39,8 +46,9 @@
                 <p>Địa chỉ<span>*</span></p>
                 <input
                   type="text"
-                  placeholder="180 Nguyễn Thị Minh Khai"
+                  placeholder="Địa chỉ nhận hàng"
                   class="checkout__input__add"
+                  name="DIA_CHI"
                 />
               </div>
 
@@ -48,20 +56,24 @@
                 <div class="col-lg-6">
                   <div class="checkout__input">
                     <p>SĐT<span>*</span></p>
-                    <input type="text" />
+                    <input type="text" name="SDT" />
                   </div>
                 </div>
                 <div class="col-lg-6">
                   <div class="checkout__input">
                     <p>Email<span>*</span></p>
-                    <input type="text" />
+                    <input type="text" value="{{user.email}}" name="EMAIL" />
                   </div>
                 </div>
               </div>
 
               <div class="checkout__input">
                 <p>Ghi chú thêm<span>*</span></p>
-                <input type="text" placeholder="Không ship vào 12h trưa" />
+                <input
+                  type="text"
+                  placeholder="Không ship vào 12h trưa"
+                  name="GHI_CHU"
+                />
               </div>
             </div>
             <div class="col-lg-4 col-md-6">
@@ -70,14 +82,18 @@
                 <div class="checkout__order__products">Sản phẩm
                   <span>Giá tiền</span></div>
                 <ul>
-                  <li>Vegetable’s Package <span>$75.99</span></li>
-                  <li>Fresh Vegetable <span>$151.99</span></li>
-                  <li>Organic Bananas <span>$53.99</span></li>
+                  {{#each products}}
+                    <li>{{this.TEN_SP}}<span
+                        class="shopping__checkout__total"
+                      >{{this.total}}</span></li>
+                  {{/each}}
                 </ul>
-                <div class="checkout__order__total">Tổng tiền
-                  <span>$750.99</span></div>
+                <div class="checkout__order__total" id="totalCheckout">
+                  {{! Tổng tiền }}
+                  {{! <span>$750.99</span> }}
+                </div>
 
-                <p>Vì lý do dịch bệnh, vui lòng chọn một trong các phương thức
+                {{! <p>Vì lý do dịch bệnh, vui lòng chọn một trong các phương thức
                   thanh toán online sau</p>
                 <div class="checkout__input__checkbox">
                   <label for="payment">
@@ -92,8 +108,9 @@
                     <input type="checkbox" id="zalopay" />
                     <span class="checkmark"></span>
                   </label>
-                </div>
-                <button type="submit" class="site-btn">Đặt hàng</button>
+                </div> }}
+                <button type="submit" class="site-btn" onclick="tongtien();">Đặt
+                  hàng</button>
               </div>
             </div>
           </div>
@@ -102,5 +119,15 @@
     </div>
   </section>
   <!-- Checkout Section End -->
-
+  <script>
+    const cTotal = document.querySelector('#totalCheckout'); let cartTotal = 0;
+    let price = 0; let a = []; hi =
+    document.getElementsByClassName("shopping__checkout__total"); for (let i =
+    0; i < hi.length; i++) { a.push(parseInt(hi[i].textContent)); }; for (let i
+    = 0; i < a.length; i++) { cartTotal = cartTotal + a[i]; }; TotalHTML =
+    "Tổng" + " tiền <span id = \"tongtien\">" + cartTotal + "</span>";
+    cTotal.innerHTML = TotalHTML; var tongtien = () => {
+    document.getElementById("TONG_TIEN").value =
+    document.getElementById("tongtien").textContent };
+  </script>
 </body>

@@ -1,18 +1,11 @@
 const shop = require("../model/ShopModel");
 const user = require("../model/UserModel");
 class ShopController {
-  checkLogin() {
-    const usercr = user.getUserLocal();
-    if (!usercr) {
-      res.redirect("/user/login");
-      return false;
-    }
-    return usercr;
-  }
   index(req, res, next) {
     const usercr = user.getUserLocal();
     if (!usercr) {
       res.redirect("/user/login");
+      return;
     }
     Promise.all([shop.getAllProductBySeller(usercr.id)])
       .then(([products]) =>
@@ -37,6 +30,7 @@ class ShopController {
     const usercr = user.getUserLocal();
     if (!usercr) {
       res.redirect("/user/login");
+      return;
     }
     Promise.all([shop.getProduct(req.params.id)])
       .then(([product]) =>
@@ -56,6 +50,7 @@ class ShopController {
     const usercr = user.getUserLocal();
     if (!usercr) {
       res.redirect("/user/login");
+      return;
     }
     Promise.all([shop.searchProductByName(req.query.q, usercr.id)])
       .then(([products]) =>
@@ -72,6 +67,7 @@ class ShopController {
     const usercr = user.getUserLocal();
     if (!usercr) {
       res.redirect("/user/login");
+      return;
     }
     shop.deleteProduct(req.params.id);
     res.redirect("/");

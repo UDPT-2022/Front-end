@@ -10,8 +10,10 @@
                             <span>Loại sản phẩm</span>
                         </div>
                         <ul>
-                            <li><a href="#">Thịt cá</a></li>
-                            <li><a href="#">Rau củ</a></li>
+                            <li><a href="/">TẤT CẢ</a></li>
+                            {{#each types}}
+                            <li><a href="/search?type={{this}}">{{this}}</a></li>
+                            {{/each}}
                     </div>
                 </div>
                 <div class="col-lg-9">

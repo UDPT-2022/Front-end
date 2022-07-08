@@ -1,0 +1,55 @@
+<body>
+  <div class="mt-4" id="form-login">
+    <br />
+    <form method="POST" action="/user/account/profile">
+      <div class="form-group">
+        <label for="email">Email: </label>
+        <label id="email">{{user.email}}</label>
+      </div>
+      <div class="form-group">
+        <label for="username">Tên người dùng: </label>
+        <input
+          type="text"
+          class="form-control"
+          id="username"
+          name="username"
+          value="{{user.name}}"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password">Mật khẩu</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password"
+          name="password"
+          onkeyup="check();"
+        />
+      </div>
+      <div class="form-group">
+        <label for="password_confirmation">Xác nhận mật khẩu</label>
+        <input
+          type="password"
+          class="form-control"
+          id="password_confirmation"
+          name="password_confirmation"
+          onkeyup="check();"
+        />
+        <span id="message"></span>
+      </div>
+      <br />
+      <button type="submit" class="btn btn-primary btn-block mb-4" disabled>Cập
+        nhật tài khoản</button>
+    </form>
+  </div>
+  <script>
+    var check = function () { if (document.getElementById('password').value ==
+    document.getElementById('password_confirmation').value) {
+    document.getElementById('submit').disabled = false;
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = ''; } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'Mật khẩu không trùng nhau';
+    document.getElementById('submit').disabled = true; } }
+  </script>
+</body>

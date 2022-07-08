@@ -36,6 +36,13 @@ class UserController {
     user.logout();
     res.redirect("/");
   }
+  profileUser(req, res, next) {
+    res.render("cus_user", {
+      layout: "customer_layout",
+      user: user.getUserLocal(),
+    });
+  }
+  updateUser(req, res, next) {}
 }
 
 module.exports = new UserController();

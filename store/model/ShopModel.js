@@ -12,6 +12,15 @@ exports.allproducts = async () => {
     .catch((error) => console.log("errrrrrrr : ", error));
   return rs;
 };
+exports.getProductType = async () => {
+  const rs = await axios({
+    method: "get",
+    url: URL + "/products/info/types",
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
 exports.getProduct = async (id) => {
   const rs = await axios({
     method: "get",
@@ -67,6 +76,25 @@ exports.getAllCart = () => {
   const storedDataUserCart = localStorage.getItem("cart_web");
   return JSON.parse(storedDataUserCart);
 };
+exports.changQualityProductOnCart = (id, q) => {
+  const storedDataUserCart = localStorage.getItem("cart_web");
+  if (q < 1) {
+    this.removeitemCart(id);
+    return;
+  }
+  if (storedDataUserCart) {
+    let cart = JSON.parse(storedDataUserCart);
+    for (let asd of cart) {
+      if (asd.MA_SP == id) {
+        asd.quantity = q;
+      }
+    }
+    for (let asd of cart) {
+      asd.total = asd.quantity * +asd.GIA_SP;
+    }
+    localStorage.setItem("cart_web", JSON.stringify(cart));
+  }
+};
 exports.removeitemCart = (id) => {
   const storedDataUserCart = localStorage.getItem("cart_web");
   if (storedDataUserCart) {
@@ -76,12 +104,13 @@ exports.removeitemCart = (id) => {
     localStorage.setItem("cart_web", JSON.stringify(cart));
   }
 };
-exports.searchProductByName = async (q) => {
+exports.searchProductByName = async (q, type) => {
   const rs = await axios({
     method: "post",
     url: URL + "/products/search",
     data: {
       TEN_SP: q,
+      LOAI_SP: type,
     },
   })
     .then((response) => response.data)

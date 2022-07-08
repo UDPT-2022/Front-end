@@ -38,6 +38,10 @@ body {
   font-smoothing: antialiased;
 }
 
+#head-custom {
+  line-height: 40px;
+}
+
 #img-cart {
   width: 100px;
   height: auto;
