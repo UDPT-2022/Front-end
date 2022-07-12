@@ -47,6 +47,10 @@ body {
   height: auto;
 }
 
+#form-danh-gia {
+  width: 100%;
+}
+
 #form-login {
   padding-left: 400px;
   padding-right: 400px;

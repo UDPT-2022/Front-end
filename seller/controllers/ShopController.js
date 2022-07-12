@@ -24,7 +24,7 @@ class ShopController {
   }
   store(req, res, next) {
     shop.addProduct(req.body);
-    res.redirect("back");
+    res.redirect("/");
   }
   update(req, res, next) {
     const usercr = user.getUserLocal();

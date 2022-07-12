@@ -1,6 +1,6 @@
 const axios = require("axios");
 const LocalStorage = require("node-localstorage").LocalStorage;
-const URL = "http://localhost:8002/api";
+const URL = "http://localhost:8010/api";
 localStorage = new LocalStorage("./scratch");
 
 exports.login = async (data) => {

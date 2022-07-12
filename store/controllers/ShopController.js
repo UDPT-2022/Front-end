@@ -116,6 +116,10 @@ class ShopController {
     shop.changQualityProductOnCart(req.query.id, req.query.q);
     res.redirect("/cart");
   }
+  reviewProduct(req, res, next) {
+    shop.reviewProduct(req.body);
+    res.redirect("back");
+  }
 }
 
 module.exports = new ShopController();

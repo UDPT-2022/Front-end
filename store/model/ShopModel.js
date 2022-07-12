@@ -17,7 +17,7 @@ exports.getProductType = async () => {
     method: "get",
     url: URL + "/products/info/types",
   })
-    .then((response) => response.data)
+    .then((response) => response.data.LOAI_SP)
     .catch((error) => console.log("errrrrrrr : ", error));
   return rs;
 };
@@ -37,6 +37,16 @@ exports.getReviewProduct = async (id) => {
     data: {
       MA_SP: id,
     },
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
+exports.reviewProduct = async (data) => {
+  const rs = await axios({
+    method: "post",
+    url: URL + "/reviews",
+    data: data,
   })
     .then((response) => response.data)
     .catch((error) => console.log("errrrrrrr : ", error));

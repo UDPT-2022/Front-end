@@ -15,5 +15,6 @@ router.get("/addcart/:id", shopController.addCart);
 router.get("/removeitem/:id", shopController.removeitemCart);
 router.get("/search", shopController.searchProductByName);
 router.get("/changq", shopController.changQualityProductOnCart);
+router.post("/review", shopController.reviewProduct);
 router.get("/", shopController.index);
 module.exports = router;

@@ -25,6 +25,7 @@ class UserController {
     });
   }
   postRegister(req, res, next) {
+    req.body.EMAIL = req.body.email;
     Promise.all([user.register(req.body)])
       .then(([data]) => {
         console.log(data);
