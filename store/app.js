@@ -9,6 +9,8 @@ const hbs = exphbs.create({
   extname: "hbs",
 });
 
+hbs.handlebars.registerHelper("dateFormat", require("handlebars-dateformat"));
+
 const port = 3000;
 const app = express();
 

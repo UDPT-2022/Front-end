@@ -31,11 +31,30 @@ class ShopController {
     });
   }
 
-  shopingCartHistory(req, res) {
-    res.render("cus_shoping-cart-history", {
-      layout: "customer_layout",
-      user: user.getUserLocal(),
-    });
+  showOrder(req, res, next) {
+    const usercr = user.getUserLocal();
+    Promise.all([shop.getAllOrderByUser(usercr.id)])
+      .then(([orders]) => {
+        res.render("cus_shoping-cart-history", {
+          layout: "customer_layout",
+          user: usercr,
+          orders: orders,
+        });
+      })
+      .catch(next);
+  }
+
+  getOrderDetail(req, res, next) {
+    const usercr = user.getUserLocal();
+    Promise.all([shop.getOrderDetailByID(req.params.id)])
+      .then(([order]) => {
+        res.render("cus_order_detail", {
+          layout: "customer_layout",
+          user: usercr,
+          order: order,
+        });
+      })
+      .catch(next);
   }
 
   checkout(req, res) {
@@ -54,6 +73,9 @@ class ShopController {
 
   createOrder(req, res, next) {
     const products = shop.getAllCart();
+    req.body.details = products;
+    shop.createOrder(req.body);
+    res.redirect("/order");
   }
 
   shopnear(req, res) {

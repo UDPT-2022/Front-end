@@ -61,22 +61,22 @@ exports.addItemToCart = (id) => {
       let flat = 0;
       for (let asd of cart) {
         if (asd.MA_SP == products.MA_SP) {
-          asd.quantity = asd.quantity ? asd.quantity + 1 : 1;
+          asd.SO_LUONG = asd.SO_LUONG ? asd.SO_LUONG + 1 : 1;
           flat = 1;
         }
       }
       if (flat == 0) {
         let a1 = products;
-        a1.quantity = 1;
+        a1.SO_LUONG = 1;
         cart.push(a1);
       }
       for (let asd of cart) {
-        asd.total = asd.quantity * +asd.GIA_SP;
+        asd.total = asd.SO_LUONG * +asd.GIA_SP;
       }
       localStorage.setItem("cart_web", JSON.stringify(cart));
     } else {
       let a1 = products;
-      a1.quantity = 1;
+      a1.SO_LUONG = 1;
       let cart = [a1];
       localStorage.setItem("cart_web", JSON.stringify(cart));
     }
@@ -96,11 +96,11 @@ exports.changQualityProductOnCart = (id, q) => {
     let cart = JSON.parse(storedDataUserCart);
     for (let asd of cart) {
       if (asd.MA_SP == id) {
-        asd.quantity = q;
+        asd.SO_LUONG = q;
       }
     }
     for (let asd of cart) {
-      asd.total = asd.quantity * +asd.GIA_SP;
+      asd.total = asd.SO_LUONG * +asd.GIA_SP;
     }
     localStorage.setItem("cart_web", JSON.stringify(cart));
   }
@@ -122,6 +122,38 @@ exports.searchProductByName = async (q, type) => {
       TEN_SP: q,
       LOAI_SP: type,
     },
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
+exports.createOrder = async (data) => {
+  const rs = await axios({
+    method: "post",
+    url: URL + "/orders/with/detail",
+    data: data,
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
+exports.getAllOrderByUser = async (id) => {
+  const rs = await axios({
+    method: "post",
+    url: URL + "/orders/search",
+    data: {
+      MA_NGUOI_DUNG: id,
+    },
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
+
+exports.getOrderDetailByID = async (id) => {
+  const rs = await axios({
+    method: "get",
+    url: URL + "/orders/" + id,
   })
     .then((response) => response.data)
     .catch((error) => console.log("errrrrrrr : ", error));
