@@ -10,7 +10,7 @@ class UserController {
   postLogin(req, res, next) {
     Promise.all([user.login(req.body)])
       .then(([data]) => {
-        if (data === undefined) {
+        if (data === undefined || data.user.role != "BUYER") {
           res.redirect("/user/login?error=Tài khoản sai, mời nhập lại");
           return;
         }
@@ -27,7 +27,6 @@ class UserController {
   postRegister(req, res, next) {
     Promise.all([user.register(req.body)])
       .then(([data]) => {
-        console.log(data);
         res.redirect("/user/login");
       })
       .catch(next);

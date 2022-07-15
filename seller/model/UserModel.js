@@ -1,6 +1,7 @@
 const axios = require("axios");
 const LocalStorage = require("node-localstorage").LocalStorage;
 const URL = "http://localhost:8010/api";
+const URL_CONTRACT = "http://localhost:8002/api";
 localStorage = new LocalStorage("./scratch");
 
 exports.login = async (data) => {
@@ -46,4 +47,21 @@ exports.register = async (data) => {
     .then((response) => response.data)
     .catch((error) => console.log("errrrrrrr : ", error));
   return rs;
+};
+exports.updateContract = async (data) => {
+  const rs = await axios({
+    method: "post",
+    url: URL_CONTRACT + "/contract",
+    data: data,
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
+exports.checkHasContract = () => {
+  const localUser = localStorage.getItem("user");
+  if (localUser) {
+    let user = JSON.parse(localUser);
+    return user.has_contract == true;
+  }
 };

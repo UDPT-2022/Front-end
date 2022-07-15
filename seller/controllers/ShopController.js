@@ -7,6 +7,10 @@ class ShopController {
       res.redirect("/user/login");
       return;
     }
+    if (!user.checkHasContract()) {
+      res.redirect("/user/contract");
+      return;
+    }
     Promise.all([shop.getAllProductBySeller(usercr.id)])
       .then(([products]) =>
         res.render("shop/show", {

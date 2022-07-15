@@ -1,0 +1,27 @@
+<div id="content">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Mã hợp đồng</th>
+        <th scope="col">Thời gian</th>
+        <th scope="col">Chứng nhận an toàn</th>
+        <th scope="col">Giấy phép kinh doanh</th>
+        {{!-- <th scope="col">Số lượng còn lại</th> --}}
+        <th scope="col">Chấp nhận</th>
+        <th scope="col">Loại bỏ</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each contracts}}
+      <tr>
+        <th scope="row"><a href="/{{this.MA_HOP_DONG}}">{{this.MA_HOP_DONG}}</a></th>
+        <td>{{this.created_at}}</td>
+        {{!-- <td>{{this.LOAI_SP}}</td> --}}
+        <td><a href="{{this.GIAY_CHUNG_NHAN_AN_TOAN}}"><img src="{{this.GIAY_CHUNG_NHAN_AN_TOAN}}" alt="Giấy chứng nhận an toàn" width="50px" ></a></td>
+        <td><a href="{{this.GIAY_PHEP_KINH_DOANH}}"><img src="{{this.GIAY_PHEP_KINH_DOANH}}" alt="Giấy phép kinh doanh" width="500" ></a></td>
+        <td><a href="/accept/{{this.MA_HOP_DONG}}" class="btn btn-primary">Chấp nhận</a></td>
+        <td><a href="/revoke/{{this.MA_HOP_DONG}}" class="btn btn-danger">Loại bỏ</a></td>
+        {{/each}}
+    </tbody>
+  </table>
+</div>

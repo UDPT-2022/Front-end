@@ -10,12 +10,12 @@ class UserController {
   postLogin(req, res, next) {
     Promise.all([user.login(req.body)])
       .then(([data]) => {
-        if (data === undefined) {
+        if (data === undefined || data.user.role != "SELLER") {
           res.redirect("/user/login?error=Tài khoản sai, mời nhập lại");
           return;
         }
-        res.redirect("/");
         user.saveUser(data);
+        res.redirect("/");
       })
       .catch(next);
   }
@@ -28,10 +28,22 @@ class UserController {
     req.body.EMAIL = req.body.email;
     Promise.all([user.register(req.body)])
       .then(([data]) => {
-        console.log(data);
         res.redirect("/user/login");
       })
       .catch(next);
+  }
+  contract(req, res, next) {
+    const usercr = user.getUserLocal();
+    res.render("user/create_contract", {
+      layout: "main",
+      user: usercr,
+    });
+  }
+  postContract(req, res, next) {
+    user.updateContract(req.body);
+    res.render("user/success_contract", {
+      layout: "main",
+    });
   }
   logout(req, res, next) {
     user.logout();

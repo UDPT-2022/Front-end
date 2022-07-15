@@ -1,0 +1,38 @@
+<div id="form-update">
+  <form action="/user/contract" method="POST" id="form-create-product">
+    <input type="hidden" id="id" name="id" value="{{user.id}}" />
+    <label for="GIAY_CHUNG_NHAN_AN_TOAN">Giấy chứng nhận an toàn</label>
+    <input
+      type="text"
+      class="form-control"
+      id="GIAY_CHUNG_NHAN_AN_TOAN"
+      name="GIAY_CHUNG_NHAN_AN_TOAN"
+      placeholder="Giấy chứng nhận an toàn"
+      onclick="changecn()"
+      onkeyup="changecn()"
+      onchange="changecn()"
+    />
+    <img id="img-cn" src="" alt="" />
+    <br />
+    <label for="GIAY_PHEP_KINH_DOANH">Giấy phép kinh doanh</label>
+    <input
+      type="text"
+      class="form-control"
+      id="GIAY_PHEP_KINH_DOANH"
+      name="GIAY_PHEP_KINH_DOANH"
+      placeholder="Giấy phép kinh doanh"
+      onclick="changegp()"
+      onkeyup="changegp()"
+      onchange="changegp()"
+    />
+    <img id="img-gp" src="" alt="" />
+    <br />
+    <button type="submit" class="btn btn-primary full-width">Cập nhật hợp đồng</button>
+  </form>
+  <script>
+    var changecn = () => { document.getElementById("img-cn").src =
+    document.getElementById("GIAY_CHUNG_NHAN_AN_TOAN").value }; var changegp =
+    () => { document.getElementById("img-gp").src =
+    document.getElementById("GIAY_PHEP_KINH_DOANH").value };
+  </script>
+</div>

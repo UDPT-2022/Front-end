@@ -1,0 +1,118 @@
+<body>
+  <section
+    class="vh-100 bg-image"
+    id="form-register"
+    style="background-image: url('https://mdbcdn.b-cdn.net/img/Photos/new-templates/search-box/img4.webp');"
+  >
+    <div class="mask d-flex align-items-center h-100 gradient-custom-3">
+      <div class="container h-100">
+        <div class="row d-flex justify-content-center align-items-center h-100">
+          <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+            <div class="card" style="border-radius: 15px;">
+              <div class="card-body p-5">
+                <h2 class="text-uppercase text-center mb-5">Đăng ký tài khoản
+                </h2>
+                <form action="/user/register" method="post">
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="name">Tên của bạn</label>
+                    <input
+                      type="text"
+                      id="name"
+                      name="name"
+                      class="form-control form-control-lg"
+                    />
+                  </div>
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="email">Email của bạn</label>
+                    <input
+                      type="email"
+                      id="email"
+                      name="email"
+                      class="form-control form-control-lg"
+                    />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="TEN_CUA_HANG">Tên cửa hàng</label>
+                    <input
+                      type="text"
+                      id="TEN_CUA_HANG"
+                      name="TEN_CUA_HANG"
+                      class="form-control form-control-lg"
+                    />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="SDT">Số điện thoại</label>
+                    <input
+                      type="text"
+                      id="SDT"
+                      name="SDT"
+                      class="form-control form-control-lg"
+                    />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="DIA_CHI">Địa chỉ</label>
+                    <input
+                      type="text"
+                      id="DIA_CHI"
+                      name="DIA_CHI"
+                      class="form-control form-control-lg"
+                    />
+                  </div>
+
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="password">Mật khẩu</label>
+                    <input
+                      type="password"
+                      id="password"
+                      name="password"
+                      class="form-control form-control-lg"
+                      onkeyup="check();"
+                    />
+                  </div>
+                  <input type="hidden" id="role" name="role" value="SELLER" />
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="password_confirmation">Xác
+                      nhận mật khẩu</label>
+                    <input
+                      type="password"
+                      id="password_confirmation"
+                      name="password_confirmation"
+                      class="form-control form-control-lg"
+                      onkeyup="check();"
+                    />
+                    <span id="message"></span>
+                  </div>
+
+                  <div class="d-flex justify-content-center">
+                    <button
+                      type="submit"
+                      class="btn btn-success btn-block btn-lg gradient-custom-4 text-body"
+                      id="submit"
+                      disabled
+                    >Đăng ký tài khoản người bán</button>
+                  </div>
+                  <p class="text-center text-muted mt-5 mb-0">Bạn đã có tài
+                    khoản?
+                    <a href="/user/login" class="fw-bold text-body"><u>Đăng nhập</u></a></p>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script>
+    var check = function () { if (document.getElementById('password').value ==
+    document.getElementById('password_confirmation').value) {
+    document.getElementById('submit').disabled = false;
+    document.getElementById('message').style.color = 'green';
+    document.getElementById('message').innerHTML = 'Password matching'; } else {
+    document.getElementById('message').style.color = 'red';
+    document.getElementById('message').innerHTML = 'Password not matching';
+    document.getElementById('submit').disabled = true; } }
+  </script>
+</body>
