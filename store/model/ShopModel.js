@@ -110,7 +110,6 @@ exports.removeitemCart = (id) => {
   if (storedDataUserCart) {
     let cart = JSON.parse(storedDataUserCart);
     cart = cart.filter((item) => item.MA_SP != id);
-    console.log(cart);
     localStorage.setItem("cart_web", JSON.stringify(cart));
   }
 };

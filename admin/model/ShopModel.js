@@ -6,8 +6,8 @@ localStorage = new LocalStorage("./scratch");
 
 exports.getAllContract = async () => {
   const rs = await axios({
-    method: "post",
-    url: URL + "/contract/search",
+    method: "get",
+    url: URL + "/contract",
     data: {},
   })
     .then((response) => response.data)
