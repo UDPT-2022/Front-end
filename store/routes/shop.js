@@ -3,7 +3,7 @@ const router = express.Router();
 
 const shopController = require("../controllers/ShopController");
 
-router.get("/shop-grid", shopController.shopgrid);
+router.get("/shop-grid/:id", shopController.shopgrid);
 router.get("/cart", shopController.cart);
 router.get("/order", shopController.showOrder);
 router.get("/order/:id", shopController.getOrderDetail);

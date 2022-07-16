@@ -15,11 +15,20 @@ class ShopController {
       .catch(next);
   }
 
-  shopgrid(req, res) {
-    res.render("cus_shop-details", {
-      layout: "customer_layout",
-      user: user.getUserLocal(),
-    });
+  shopgrid(req, res, next) {
+    Promise.all([
+      shop.getShop(req.params.id),
+      shop.getAllProductsByShop(req.params.id),
+    ])
+      .then(([shop, products]) => {
+        res.render("cus_shop-details", {
+          layout: "customer_layout",
+          products: products,
+          shop: shop,
+          user: user.getUserLocal(),
+        });
+      })
+      .catch(next);
   }
 
   cart(req, res) {
@@ -75,6 +84,7 @@ class ShopController {
     const products = shop.getAllCart();
     req.body.details = products;
     shop.createOrder(req.body);
+    shop.removeCart();
     res.redirect("/order");
   }
 
@@ -96,12 +106,14 @@ class ShopController {
     Promise.all([
       shop.getProduct(req.params.id),
       shop.getReviewProduct(req.params.id),
+      shop.allproducts(),
     ])
-      .then(([product, reviews]) => {
+      .then(([product, reviews, products]) => {
         res.render("cus_item-detail", {
           layout: "customer_layout",
           product: product,
           reviews: reviews,
+          products: products,
           user: user.getUserLocal(),
         });
       })
@@ -128,7 +140,7 @@ class ShopController {
           layout: "customer_layout",
           products: products,
           value: req.query.q,
-          //types: types,
+          types: types,
           user: user.getUserLocal(),
         })
       )

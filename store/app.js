@@ -10,6 +10,12 @@ const hbs = exphbs.create({
 });
 
 hbs.handlebars.registerHelper("dateFormat", require("handlebars-dateformat"));
+hbs.handlebars.registerHelper("limit", function (arr, limit) {
+  if (!Array.isArray(arr)) {
+    return [];
+  }
+  return arr.slice(0, limit);
+});
 
 const port = 3000;
 const app = express();

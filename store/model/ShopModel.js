@@ -1,6 +1,7 @@
 const axios = require("axios");
 const LocalStorage = require("node-localstorage").LocalStorage;
 const URL = "http://localhost:8001/api";
+const URL2 = "http://localhost:8002/api";
 localStorage = new LocalStorage("./scratch");
 
 exports.allproducts = async () => {
@@ -18,6 +19,27 @@ exports.getProductType = async () => {
     url: URL + "/products/info/types",
   })
     .then((response) => response.data.LOAI_SP)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
+exports.getShop = async (id) => {
+  const rs = await axios({
+    method: "get",
+    url: URL2 + "/store/" + id,
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
+exports.getAllProductsByShop = async (id) => {
+  const rs = await axios({
+    method: "post",
+    url: URL + "/products/search",
+    data: {
+      MA_CUA_HANG: id,
+    },
+  })
+    .then((response) => response.data)
     .catch((error) => console.log("errrrrrrr : ", error));
   return rs;
 };
@@ -111,6 +133,12 @@ exports.removeitemCart = (id) => {
     let cart = JSON.parse(storedDataUserCart);
     cart = cart.filter((item) => item.MA_SP != id);
     localStorage.setItem("cart_web", JSON.stringify(cart));
+  }
+};
+exports.removeCart = () => {
+  const storedDataUserCart = localStorage.getItem("cart_web");
+  if (storedDataUserCart) {
+    localStorage.removeItem("cart_web");
   }
 };
 exports.searchProductByName = async (q, type) => {
