@@ -1,0 +1,49 @@
+<div id="menu">
+  <div class="hero__search__form">
+    <form action="/search">
+      <input type="text" id="q" name="q" class="form-control" placeholder="Tìm kiến sản phẩm" value="{{value}}">
+      <button type="submit" class="btn btn-primary bt-add">Tìm kiếm</button>
+    </form>
+  </div>
+  <ul class="ListMenu">
+    <li>
+    </li>
+  </ul>
+  <a href="/create" class="btn btn-success bt-add">Thêm sản phẩm</a>
+  <a href="/order" class="btn btn-success bt-add">Đơn hàng</a>
+</div>
+<div id="content">
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th scope="col">Mã đơn hàng</th>
+        <th scope="col">Người nhận</th>
+        <th scope="col">Địa chỉ</th>
+        <th scope="col">Email</th>
+        <th scope="col">SDT</th>
+        <th scope="col">Ghi chú</th>
+        <th scope="col">Tổng tiền</th>
+        <th scope="col">Trạng thái</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each orders}}
+      <tr>
+        <th scope="row">{{this.MA_DON_HANG}}</th>
+        <th scope="row">{{this.HO_TEN}}</th>
+        <th scope="row">{{this.DIA_CHI}}</th>
+        <th scope="row">{{this.EMAIL}}</th>
+        <th scope="row">{{this.SDT}}</th>
+        <th scope="row">{{this.GHI_CHU}}</th>
+        <th scope="row">{{this.TONG_TIEN}}</th>
+        <th scope="row">{{this.TRANG_THAI}}</th>
+        <td><a href="/order/{{this.MA_DON_HANG}}" class="btn btn-primary">Chi tiết</a></td>
+        <td><a href="/order/prepare/{{this.MA_DON_HANG}}" class="btn btn-primary">Chuẩn bị</a></td>
+        <td><a href="/order/complete/{{this.MA_DON_HANG}}" class="btn btn-primary">Chờ giao hàng</a></td>
+        {{/each}}
+    </tbody>
+  </table>
+</div>

@@ -76,6 +76,51 @@ class ShopController {
     shop.deleteProduct(req.params.id);
     res.redirect("/");
   }
+
+  showOrder(req, res, next) {
+    const usercr = user.getUserLocal();
+    Promise.all([shop.getAllOrderByUser(usercr.id)])
+      .then(([orders]) => {
+        res.render("shop/cus_shoping-cart-history", {
+          layout: "main",
+          user: usercr,
+          orders: orders,
+        });
+      })
+      .catch(next);
+  }
+
+  getOrderDetail(req, res, next) {
+    const usercr = user.getUserLocal();
+    Promise.all([shop.getOrderDetailByID(req.params.id)])
+      .then(([order]) => {
+        res.render("shop/cus_order_detail", {
+          layout: "main",
+          user: usercr,
+          order: order,
+        });
+      })
+      .catch(next);
+  }
+
+  prepareOrder(req, res, next) {
+    const usercr = user.getUserLocal();
+    if (!usercr) {
+      res.redirect("/user/login");
+      return;
+    }
+    shop.prepareOrder(req.params.id);
+    res.redirect("/order");
+  }
+  completeOrder(req, res, next) {
+    const usercr = user.getUserLocal();
+    if (!usercr) {
+      res.redirect("/user/login");
+      return;
+    }
+    shop.completeOrder(req.params.id);
+    res.redirect("/order");
+  }
 }
 
 module.exports = new ShopController();

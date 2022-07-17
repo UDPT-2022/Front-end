@@ -79,3 +79,43 @@ exports.deleteProduct = async (id) => {
     .catch((error) => console.log("errrrrrrr : ", error));
   return rs;
 };
+exports.getAllOrderByUser = async (id) => {
+  const rs = await axios({
+    method: "post",
+    url: URL + "/orders/search",
+    data: {
+      MA_CUA_HANG: id,
+    },
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
+
+exports.getOrderDetailByID = async (id) => {
+  const rs = await axios({
+    method: "get",
+    url: URL + "/orders/" + id,
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
+exports.prepareOrder = async (id) => {
+  const rs = await axios({
+    method: "put",
+    url: "http://localhost:8010/api/order/" + id + "/seller/prepare" ,
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};
+exports.completeOrder = async (id) => {
+  const rs = await axios({
+    method: "put",
+    url: "http://localhost:8010/api/order/" + id + "/seller/complete" ,
+  })
+    .then((response) => response.data)
+    .catch((error) => console.log("errrrrrrr : ", error));
+  return rs;
+};

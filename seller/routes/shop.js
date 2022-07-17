@@ -10,4 +10,9 @@ router.post("/update", shopController.updateProduct);
 router.get("/delete/:id", shopController.deleteProduct);
 router.get("/search", shopController.searchProductByName);
 router.get("/", shopController.index);
+
+router.get("/order", shopController.showOrder);
+router.get("/order/:id", shopController.getOrderDetail);
+router.get("/order/prepare/:id", shopController.prepareOrder);
+router.get("/order/complete/:id", shopController.completeOrder);
 module.exports = router;
